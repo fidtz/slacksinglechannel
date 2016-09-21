@@ -58,6 +58,8 @@ class ChannelWindow:
                     self.parentwindow.title(self.currentchannel.get())
 
             except queue.Empty:
+                if len(labeltext.splitlines(True)) == 30:
+                    labeltext = ''.join(labeltext.splitlines(True)[20:])
                 break
             if m is None:
                 break
@@ -75,6 +77,7 @@ def updateusers(scupuser):
 
 def updatechannels(scupdate):
     channellistraw = scupdate.api_call('channels.list')
+    #print(channellistraw)
     channeldictupdate = {}
     for u in channellistraw['channels']:
         channeldictupdate[u['name']] = u['id']
