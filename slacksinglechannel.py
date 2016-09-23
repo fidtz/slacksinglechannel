@@ -58,8 +58,8 @@ class ChannelWindow:
                     self.parentwindow.title(self.currentchannel.get())
 
             except queue.Empty:
-                if len(labeltext.splitlines(True)) == 30:
-                    labeltext = ''.join(labeltext.splitlines(True)[20:])
+                if len(labeltext.splitlines(True)) > 30:
+                    labeltext = ''.join(labeltext.splitlines(True)[1:])
                 break
             if m is None:
                 break
