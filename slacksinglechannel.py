@@ -44,7 +44,12 @@ class ChannelWindow:
 
     def update(self, _):  # when enter is pressed
         if len(self.entry.get()) > 0:
-            self.messagesout.put((self.channeldict[self.currentchannel.get()], self.entry.get()))  # add message to queue
+            self.messagesout.put((self.channeldict[self.currentchannel.get()], self.entry.get())) # add message to queue
+            self.entry.delete(0,END)
+            self.entry.icursor(0)
+            self.entry.focus_set()
+
+
 
     def update_list(self):
         labeltext = self.messages.cget("text")
@@ -56,6 +61,8 @@ class ChannelWindow:
                     self.parentwindow.deiconify()
                     self.parentwindow.focus_force()
                     self.parentwindow.title(self.currentchannel.get())
+                    self.entry.icursor(0)
+                    self.entry.focus_set()
 
             except queue.Empty:
                 if len(labeltext.splitlines(True)) > 30:
@@ -64,6 +71,7 @@ class ChannelWindow:
             if m is None:
                 break
         self.messages.configure(text=labeltext)
+
         self.frame.after(1100, self.update_list)
 
 
