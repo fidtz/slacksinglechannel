@@ -44,12 +44,10 @@ class ChannelWindow:
 
     def update(self, _):  # when enter is pressed
         if len(self.entry.get()) > 0:
-            self.messagesout.put((self.channeldict[self.currentchannel.get()], self.entry.get())) # add message to queue
-            self.entry.delete(0,END)
+            self.messagesout.put((self.channeldict[self.currentchannel.get()], self.entry.get()))  # add message to queue
+            self.entry.delete(0, END)
             self.entry.icursor(0)
             self.entry.focus_set()
-
-
 
     def update_list(self):
         labeltext = self.messages.cget("text")
@@ -85,7 +83,7 @@ def updateusers(scupuser):
 
 def updatechannels(scupdate):
     channellistraw = scupdate.api_call('channels.list')
-    #print(channellistraw)
+    # print(channellistraw)
     channeldictupdate = {}
     for u in channellistraw['channels']:
         channeldictupdate[u['name']] = u['id']
